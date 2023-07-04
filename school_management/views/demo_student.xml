@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="demo_student_1" model="school.management.student">
+            <field name="er_num">ENR0001</field>
+            <field name="name">Baburao</field>
+            <field name="phone_number">1234567890</field>
+            <field name="dob">2000-03-05</field>
+            <field name="age">23</field>
+
+        </record>
+        <record id="demo_student_2" model="school.management.student">
+            <field name="er_num">ENR0002</field>
+            <field name="name">Raju</field>
+            <field name="phone_number">9876543210</field>         
+            <field name="dob">2000-03-04</field>
+            <field name="age">23</field>
+
+        </record>
+        <record id="demo_student_3" model="school.management.student">
+            <field name="er_num">ENR0003</field>
+            <field name="name">Shyam</field>
+            <field name="phone_number">5678901234</field>           
+            <field name="dob">2000-03-05</field>
+            <field name="age">23</field>
+
+        </record>
+    </data>
+</odoo>

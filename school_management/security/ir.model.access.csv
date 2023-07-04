@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+school_student_id,student_name,model_school_management_student,,1,1,1,1
+teacher_id,teacher_name,model_school_management_teacher,,1,1,1,1

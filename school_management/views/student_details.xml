@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- View for the student form -->
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">school.management.student.form</field>
+            <field name="model">school.management.student</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <sheet>
+                        <group>
+                            <!-- Grouping fields -->
+                            <group>
+                                <field name="name"/>  
+                                <field name="phone_number"/>  
+                                <field name="gender"/>
+                            </group>
+                            <group>
+                                <field name="street"/>
+                                <field name="city"/>
+                                <field name="state_id"/>
+                                <field name="country_id"/>
+                                <field name="zip_code"/>  
+                            </group>
+                        </group>
+                        <notebook>
+                            <!-- Notebook page for student details -->
+                            <page string="Student Details">
+                                <group>
+                                    <field name="standard" options="{'no_create': True}"/>
+                                    <field name="division"/>
+                                    <field name="stream" attrs="{'invisible': [('standard', 'not in', ['11', '12'])]}"/>  
+                                    <field name="roll_number"/>  
+                                    <field name="enr_number"/>  
+                                    <field name="class_teacher"/>  
+                                    <field name="dob"/> 
+                                    <field name="birth_month"/>  
+                                    <field name="age" readonly="1"/>  
+                                </group>
+                            </page>
+                            <!-- Notebook page for parent details -->
+                            <page string="Parent Details">
+                                <group>
+                                    <field name="parent_name"/>  
+                                    <field name="relation"/>  
+                                    <field name="parent_phone_number"/>  
+                                    <field name="email"/>  
+                                </group>
+                            </page>
+                            <!-- Notebook page for previous school details -->
+                            <page string="Previous School Details">
+                                <group>
+                                    <field name="name_in_previous_school"/> 
+                                    <field name="er_num"/> 
+                                    <field name="admission_date_of_last_school"/> 
+                                    <field name="leaving_date_of_last_school"/>  
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>  
+                        <field name="message_ids" options="{'post refresh': 'recipients'}"/> 
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- View for the teacher form -->
+        <record id="view_teacher_form" model="ir.ui.view">
+            <field name="name">school.management.teacher.form</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <form string="Teacher">
+                    <sheet>
+                        <group>
+                            <field name="name"/>  
+                            <field name="standard" options="{'no_create': True}"/> 
+                            <field name="division"/>  
+                            <field name="stream" attrs="{'invisible': [('standard', 'not in', ['11', '12'])]}"/> 
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for the student model -->
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">Student Tree View</field>
+            <field name="model">school.management.student</field>
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <!-- List of fields to display in the tree view -->
+                    <field name="name"/>
+                    <field name="standard"/>
+                    <field name="gender"/>
+                    <field name="division"/>
+                    <field name="stream"/>
+                    <field name="roll_number"/>
+                    <field name="enr_number"/>
+                    <field name="class_teacher"/>
+                    <field name="street"/>
+                    <field name="city"/>
+                    <field name="state_id"/>
+                    <field name="country_id"/>
+                    <field name="zip_code"/>
+                    <field name="phone_number"/>
+                    <field name="dob"/>
+                    <field name="age"/>
+                    <field name="parent_name"/>
+                    <field name="relation"/>
+                    <field name="parent_phone_number"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Tree view for the teacher model -->
+        <record id="view_teacher_tree" model="ir.ui.view">
+            <field name="name">Teacher Tree View</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <tree string="Teacher">
+                    <!-- List of fields to display in the tree view -->
+                    <field name="name"/>
+                    <field name="standard"/>
+                    <field name="division"/>
+                    <field name="stream"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for submitting student data -->
+        <record model="ir.actions.act_window" id="action_student_submit">
+            <field name="name">Submit Action</field>
+            <field name="res_model">school.management.student</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Action for submitting teacher data -->
+        <record model="ir.actions.act_window" id="action_teacher_submit">
+            <field name="name">Submit Action</field>
+            <field name="res_model">school.management.teacher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- View for student search -->
+        <record id="view_school_management_student_search" model="ir.ui.view">
+            <field name="name">school.management.student.search</field>
+            <field name="model">school.management.student</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="standard" string="Standard &amp; Division"/>
+                    <filter name="filter_10th" string="10th Standard" domain="[('standard', '=', '10')]"/>
+                    <field name="birth_month"/>
+                    <group expand='0' string="Group By">
+                        <filter name="birth_month" string="Birth Month" context="{'group_by': 'birth_month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- View for teacher search -->
+        <record id="view_school_management_teacher_search" model="ir.ui.view">
+            <field name="name">school.management.teacher.search</field>
+            <field name="model">school.management.teacher</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Teacher Name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action for displaying science stream student details -->
+        <record model="ir.actions.act_window" id="action_science_details">
+            <field name="name">Science</field>
+            <field name="res_model">school.management.student</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stream', '=', 'science')]</field>
+        </record>
+
+        <!-- Action for displaying commerce stream student details -->
+        <record model="ir.actions.act_window" id="action_commerce_details">
+            <field name="name">Commerce</field>
+            <field name="res_model">school.management.student</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stream', '=', 'commerce')]</field>
+        </record>
+
+        <!-- Action for displaying arts stream student details -->
+        <record model="ir.actions.act_window" id="action_arts_details">
+            <field name="name">Arts</field>
+            <field name="res_model">school.management.student</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stream', '=', 'arts')]</field>
+        </record>
+
+        <!-- Menu items -->
+        <menuitem id="menu_student_details" name="School" sequence="0" action="action_student_submit"/>
+        <menuitem id="menu_student2_details" name="Stream" parent="menu_student_details" />
+        <menuitem id="menu_science_details" name="Science" parent="menu_student2_details" action="action_science_details"/>
+        <menuitem id="menu_commerce_details" name="Commerce" parent="menu_student2_details" action="action_commerce_details"/>
+        <menuitem id="menu_arts_details" name="Arts" parent="menu_student2_details" action="action_arts_details"/>
+        <menuitem id="menu_teacher_details" name="Teacher Details" parent="menu_student_details" action="action_teacher_submit"/>
+    </data>
+</odoo>
